@@ -45,7 +45,6 @@ public class MainView extends View {
     private float titleTextSize;
     private float bodyTextSize;
     private float headerTextSize;
-    private float instructionsTextSize;
     private float gameOverTextSize;
     //Layout variables
     private int cellSize = 0;
@@ -251,14 +250,6 @@ public class MainView extends View {
         canvas.drawText(getResources().getString(R.string.header), startingX, headerStartY, paint);
     }
 
-    private void drawInstructions(Canvas canvas) {
-        paint.setTextSize(instructionsTextSize);
-        paint.setTextAlign(Paint.Align.LEFT);
-        int textShiftY = centerText() * 2;
-        canvas.drawText(getResources().getString(R.string.instructions),
-                startingX, endingY - textShiftY + textPaddingSize, paint);
-    }
-
     private void drawBackground(Canvas canvas) {
         drawDrawable(canvas, backgroundRectangle, startingX, startingY, endingX, endingY);
     }
@@ -428,7 +419,6 @@ public class MainView extends View {
         drawUndoButton(canvas);
         drawBackground(canvas);
         drawBackgroundGrid(canvas);
-        drawInstructions(canvas);
 
     }
 
@@ -520,10 +510,6 @@ public class MainView extends View {
 
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(1000);
-        instructionsTextSize = Math.min(
-            1000f * (widthWithPadding / (paint.measureText(getResources().getString(R.string.instructions)))),
-            textSize / 1.5f
-        );
         gameOverTextSize = Math.min(
             Math.min(
                 1000f * ((widthWithPadding - gridWidth * 2) / (paint.measureText(getResources().getString(R.string.game_over)))),
